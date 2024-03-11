@@ -3,7 +3,6 @@ describe("Laptop title fetch",()=>{
         await browser.url("https://www.amazon.in/");
         await browser.maximizeWindow();
         await $("//input[@aria-label='Search Amazon.in']").setValue("laptop");
-i
         await $("//li[@aria-label='Dell']/descendant::i[@class='a-icon a-icon-checkbox']").click();
         let title=await $$("//span[@class='a-size-medium a-color-base a-text-normal']");
         const price=await $$("//span[@class='a-price']/descendant::span[@class='a-price-whole']");
