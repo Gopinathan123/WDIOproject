@@ -51,8 +51,23 @@ export const config = {
     //
     capabilities: [{
         browserName: 'chrome',
-        maxInstances: 1
-    }],
+        // To Handle Notification Popup in Chrome
+        // 'goog:chromeOptions':{
+        //     prefs:{
+        //         'profile.default_content_setting_values.notifications':2
+        //     }
+        // },
+    },
+    {
+        browserName:'firefox',
+    //     //To Handle Notification Popup in firefox 
+    //     'moz:firefoxOptions':{
+    //         prefs:{
+    //             'dom.webnotifications.enebled':false
+    //         }
+    //     }
+    }
+],
 
     //
     // ===================
@@ -124,7 +139,12 @@ export const config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec'],
+    reporters: ['spec', 
+    ['allure', {
+        outputDir: 'allure-results',
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: true,
+    }]],
 
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
@@ -187,8 +207,12 @@ export const config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {object}         browser      instance of created browser/device session
      */
-    // before: function (capabilities, specs) {
-    // },
+    before: async function () {
+        await import('expect-webdriverio');
+        global.wdioExpect = global.expect;
+        const chai = await import('chai');
+        global.expect = chai.expect; 
+    },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {string} commandName hook command name
@@ -205,8 +229,8 @@ export const config = {
     /**
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
-    // beforeTest: function (test, context) {
-    // },
+    beforeTest: function (test, context) {
+    },
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
      * beforeEach in Mocha)
