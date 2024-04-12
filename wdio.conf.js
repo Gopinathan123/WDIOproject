@@ -58,15 +58,15 @@ export const config = {
         //     }
         // },
     },
-    {
-        browserName:'firefox',
+    // {
+    //     browserName:'firefox',
     //     //To Handle Notification Popup in firefox 
     //     'moz:firefoxOptions':{
     //         prefs:{
     //             'dom.webnotifications.enebled':false
     //         }
     //     }
-    }
+    // }
 ],
 
     //

@@ -1,6 +1,7 @@
 import {expect as expectchai} from "chai";
 import {expect as expectwdio} from '@wdio/globals';
-// import { should } from "chai";
+import chai from "chai";
+chai.should();
 
 describe("Home page", ()=>{
     before(async()=>{
